@@ -1,0 +1,9 @@
+<%= form_for :groq_request, url: groq_request_path, method: :post, remote: true do |form| %>
+  <%= form.hidden_field :uuid, value: @uuid %>
+
+  <div class="group">
+    <%= form.file_field :file, class: "" %>
+  </div>
+
+  <%= form.submit %>
+<% end %>
