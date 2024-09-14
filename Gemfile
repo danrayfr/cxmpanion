@@ -63,3 +63,6 @@ group :test do
   gem "capybara"
   gem "selenium-webdriver"
 end
+
+gem "groq", "~> 0.3.2"
+gem "faraday"
