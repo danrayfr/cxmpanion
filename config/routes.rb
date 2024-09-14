@@ -3,6 +3,8 @@ Rails.application.routes.draw do
 
   post "groq_request", to: "pages#groq_request"
 
+  resources :records, only: %i[ new create ]
+
   get "up" => "rails/health#show", as: :rails_health_check
 
   # Render dynamic PWA files from app/views/pwa/* (remember to link manifest in application.html.erb)

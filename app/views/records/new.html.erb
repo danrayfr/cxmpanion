@@ -1,0 +1,20 @@
+<!-- app/views/chats/new.html.erb -->
+<h1>Chat with the AI</h1>
+
+<%= form_with url: records_path, method: :post, local: true, data: { turbo: false } do |f| %>
+  <div>
+    <%= f.label :message, "Enter your message:" %>
+    <%= f.text_field :message %>
+  </div>
+  <div>
+    <%= f.submit "Send" %>
+  </div>
+<% end %>
+
+<% if local_assigns[:user_response].present? && local_assigns[:system_response].present? %>
+  <div id="response">
+    <div><strong>AI user_response:</strong> <%= user_response %></div>
+    <br><br>
+    <div><strong>AI system_response:</strong> <%= system_response %></div>
+  </div>
+<% end %>

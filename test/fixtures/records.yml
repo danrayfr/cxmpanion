@@ -1,0 +1,11 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  Record: MyString
+  short_summary: MyText
+  full_summary: MyText
+
+two:
+  Record: MyString
+  short_summary: MyText
+  full_summary: MyText
