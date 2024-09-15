@@ -1,4 +1,6 @@
 class Record < ApplicationRecord
+  has_rich_text :analysis
+
   def initialize_client
     @client = Groq::Client.new
   end

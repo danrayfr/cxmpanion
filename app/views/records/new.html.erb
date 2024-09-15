@@ -11,10 +11,8 @@
   </div>
 <% end %>
 
-<% if local_assigns[:user_response].present? && local_assigns[:system_response].present? %>
+<% if local_assigns[:response].present? %>
   <div id="response">
-    <div><strong>AI user_response:</strong> <%= user_response %></div>
-    <br><br>
-    <div><strong>AI system_response:</strong> <%= system_response %></div>
+    <div><strong>groq response:</strong> <%= response %></div>
   </div>
 <% end %>
