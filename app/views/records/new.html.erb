@@ -1,14 +1,13 @@
 <!-- app/views/chats/new.html.erb -->
 <h1>Chat with the AI</h1>
 
-<%= form_with url: records_path, method: :post, local: true, data: { turbo: false } do |f| %>
-  <div>
-    <%= f.label :message, "Enter your message:" %>
-    <%= f.text_field :message %>
+<%= form_with model: @record, method: :post, remote: true do |form| %>
+  <%= form.hidden_field :uuid, value: @uuid %>
+  <div class="group">
+    <%= form.file_field :file, class: "" %>
   </div>
-  <div>
-    <%= f.submit "Send" %>
-  </div>
+
+  <%= form.submit %>
 <% end %>
 
 <% if local_assigns[:response].present? %>

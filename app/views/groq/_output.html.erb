@@ -1,5 +1,5 @@
-<% if generated_transcription && generated_translation %>
-  <%= content_tag :div, generated_transcription %>
+<% if generated_response %>
+  <%= content_tag :div, generated_response %>
   <br><br><br>
-  <%= content_tag :div, generated_translation %>
+  <%# = content_tag :div, generated_translation %>
 <% end %>

@@ -1,0 +1,22 @@
+<div>
+  <h1>Groq Form Request </h1>
+  <%#= render partial: "groq/form", locals: { uuid: @uuid } %>
+
+  <%= turbo_stream_from "channel_#{@uuid}" %>
+
+  <div id="groq_output">
+    <%#= render partial: "groq/output", locals: { generated_response: "" } %>
+  </div>
+</div>
+
+<%#= Record.first.analysis if Record.any? %>
+
+<%# = render "import" %>
+
+<%#= Record.last.analysis if Record.any? %>
+
+
+<audio controls>
+  <source src="<%#= url_for(Record.last.file) %>" type="audio/mpeg">
+Your browser does not support the audio element.
+</audio>

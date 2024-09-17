@@ -45,7 +45,6 @@ gem "image_processing", "~> 1.2"
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "debug", platforms: %i[ mri windows ], require: "debug/prelude"
-  gem "dotenv", groups: [ :development, :test ]
 
   # Static analysis for security vulnerabilities [https://brakemanscanner.org/]
   gem "brakeman", require: false
@@ -68,3 +67,5 @@ end
 gem "groq", "~> 0.3.2"
 gem "faraday", "~> 2.7"
 gem "faraday-multipart"
+gem "csv"
+gem "dotenv-rails"

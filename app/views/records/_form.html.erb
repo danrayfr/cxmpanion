@@ -1,0 +1,9 @@
+<%= form_with model: @record, method: :post, remote: true do |form| %>
+  <%#= form.hidden_field :uuid, value: @uuid %>
+
+  <div class="group">
+    <%= form.file_field :file, class: "" %>
+  </div>
+
+  <%= form.submit %>
+<% end %>

@@ -1,9 +1,10 @@
 Rails.application.routes.draw do
-  root "pages#index"
+  root "companions#index"
 
-  post "groq_request", to: "pages#groq_request"
+  # post "groq_request", to: "pages#groq_request"
+  # post "import", to: "pages#import"
 
-  resources :records, only: %i[ new create ]
+  resources :records, only: %i[ create ]
 
   get "up" => "rails/health#show", as: :rails_health_check
 

@@ -1,0 +1,14 @@
+<%= render "form" %>
+
+<audio controls>
+  <source src="<%= url_for(Record.last.file) %>" type="audio/mpeg">
+  Your browser does not support the audio element.
+</audio>
+
+<%#= Record.last.file_attachment %>
+
+<%#= url_for(Record.last.file) %>
+
+<%= Record.last&.transcript %>
+
+<%= Record.last&.analysis %>
