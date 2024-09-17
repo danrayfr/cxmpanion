@@ -69,3 +69,5 @@ gem "faraday", "~> 2.7"
 gem "faraday-multipart"
 gem "csv"
 gem "dotenv-rails"
+
+gem "tailwindcss-rails", "~> 2.7"
