@@ -1,18 +1,33 @@
 <div class="max-w-2xl mx-auto p-4">
 
-  <%= form_with model: @record, method: :post, remote: true do |form| %>
-    <div class="mb-4">
-      <label for="title" class="block text-lg font-medium text-indigo mb-1">Task</label>
-      <%= form.text_area :prompt, required: true, class: "w-full px-4 py-2 border border-[#303e7b] rounded-md focus:outline-none focus:border-[#303e7b] text-indigo bg-transparent", rows: "4" %>
+  <%= form_with model: @record, method: :post, remote: true, data: { controller: "prompt" } do |form| %>
+
+    <div class="mb-8">
+      <% if PromptTemplate.any? %>
+        <div>
+          <label for="title" class="block text-lg font-medium text-indigo mb-1">Select template</label>
+          <%= form.collection_select :qa_template_id,
+                                      PromptTemplate.ordered,
+                                      :id,
+                                      :name,
+                                      { prompt: 'Select Template'},
+                                      { class: "w-full px-4 py-2 border border-[#303e7b] rounded-md focus:outline-none focus:border-[#303e7b] text-indigo bg-transparent", id: "coaching-template-select", data: { prompt_target: "templateSelect", action: "change->prompt#updateForm" }} %>
+        </div>
+      <% end %>
+    <div>
+
+    <div class="mb-4 mt-4">
+      <label for="task" class="block text-lg font-medium text-indigo mb-1">Task</label>
+      <%= form.text_area :prompt, required: true, class: "w-full px-4 py-2 border border-[#303e7b] rounded-md focus:outline-none focus:border-[#303e7b] text-indigo bg-transparent", rows: "4", data: { prompt_target: "task" } %>
     </div>
 
     <div class="mb-4">
-      <label for="title" class="block text-lg font-medium text-indigo mb-1">Format</label>
-      <%= form.rich_text_area :format, required: true, class: "w-full px-4 py-2 border border-[#303e7b] rounded-md focus:outline-none focus:border-[#303e7b] text-indigo bg-transparent" %>
+      <label for="format" class="block text-lg font-medium text-indigo mb-1">Format</label>
+      <%= form.rich_text_area :format, required: true, class: "w-full px-4 py-2 border border-[#303e7b] rounded-md focus:outline-none focus:border-[#303e7b] text-indigo bg-transparent", data: { prompt_target: "format" } %>
     </div>
 
     <div class="mb-4">
-      <label for="title" class="block text-lg font-medium text-indigo mb-1">File (MPEG/CSV)</label>
+      <label for="file" class="block text-lg font-medium text-indigo mb-1">File (MPEG/CSV)</label>
       <%= form.file_field :file, required: true, class: "w-full px-4 py-2 border border-[#303e7b] rounded-md focus:outline-none focus:border-[#303e7b] text-indigo bg-transparent" %>
     </div>
 
@@ -20,3 +35,7 @@
   <% end %>
 
 </div>
+
+<script>
+  var isEditing = <%= @record.persisted? ? "true" : "false" %>
+</script>

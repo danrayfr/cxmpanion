@@ -1,11 +1,18 @@
 class PromptTemplatesController < ApplicationController
-  before_action :set_prompt_template, only: %i[ edit update destroy ]
+  before_action :set_prompt_template, only: %i[ show edit update destroy ]
   def index
     @prompt_templates = PromptTemplate.ordered
   end
 
   def new
     @prompt_template = PromptTemplate.new
+  end
+
+  def show
+    respond_to do |format|
+      format.html
+      format.json { render json: @prompt_template.to_json(include: { format: { only: %i[id body] } }) }
+    end
   end
 
   def create

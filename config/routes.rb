@@ -7,7 +7,7 @@ Rails.application.routes.draw do
     resources :reviews, except: %i[ index show ]
   end
 
-  resources :prompt_templates, except: :show
+  resources :prompt_templates
 
   get "up" => "rails/health#show", as: :rails_health_check
 
