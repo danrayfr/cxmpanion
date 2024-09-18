@@ -68,5 +68,31 @@
         </div>
       </div>
     </section>
+    <section>
+      <div class="wrap mx-auto px-4 pb-14 md:pb-20 flex flex-col items-center">
+        <% if @record.file.content_type == "text/csv" %>
+        <% @csv_data = CSV.parse(@record.file.download, headers: true) %>
+
+        <table class="mt-12">
+          <thead>
+            <tr>
+              <% @csv_data.headers.each do |header| %>
+                <th><%= encrypt_data(header) %></th>
+              <% end %>
+            </tr>
+          </thead>
+          <tbody>
+            <% @csv_data.each do |row| %>
+              <tr>
+                <% row.each do |field| %>
+                  <td><%= encrypt_data(field[1]) %></td>
+                <% end %>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+        <% end %>
+      </div>
+    </section>
   </div>
 </div>
