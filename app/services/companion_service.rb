@@ -1,6 +1,5 @@
 class CompanionService
   def analyze(prompt, transcript, file)
-    # binding.b
     record = Record.new
 
     user_response = record.generate_response_user_role("#{prompt}#{transcript}")
@@ -12,8 +11,6 @@ class CompanionService
     record.analysis = analysis
 
     record.save
-
-    Rails.logger.info("Record ID: #{record.id}")
 
     "#{user_response}\n\n#{system_response}"
   end

@@ -5,6 +5,8 @@ class Record < ApplicationRecord
 
   before_create { self.uid = generate_uid }
 
+  scope :ordered, -> { order(created_at: :desc) }
+
   def initialize_client
     @client = Groq::Client.new
   end

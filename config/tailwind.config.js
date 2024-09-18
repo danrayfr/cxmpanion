@@ -10,7 +10,8 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        sans: ['Inter var', ...defaultTheme.fontFamily.sans],
+        sans: ["SUSE", "system-ui"],
+        apple: ["Homemade Apple", "cursive"],
       },
     },
   },

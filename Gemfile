@@ -71,3 +71,4 @@ gem "csv"
 gem "dotenv-rails"
 
 gem "tailwindcss-rails", "~> 2.7"
+gem "local_time"

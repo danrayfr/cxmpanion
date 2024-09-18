@@ -1,17 +1,19 @@
-<!-- app/views/chats/new.html.erb -->
-<h1>Chat with the AI</h1>
+<% content_for(:title) { "New record" } %>
 
-<%= form_with model: @record, method: :post, remote: true do |form| %>
-  <%= form.hidden_field :uuid, value: @uuid %>
-  <div class="group">
-    <%= form.file_field :file, class: "" %>
+<section class="text-indigo">
+  <div class="wrap mx-auto px-4 pb-14 md:pb-20 flex flex-col items-center">
+    <header class="md:mx-auto md:text-center mt-8 md:mt-16 mb-10 md:mb-16">
+      <h1 class="text-3.5xl md:text-5xl leading-10">
+        Add new record
+      </h1>
+    </header>
+
+    <p class="md:text-xl max-w-3xl -mt-8">
+      I am your <span class="font-apple">intelligent cx</span> companion designed to help teams optimize their process of customer interaction quality. Simply upload your files, and I'll transcribe and process it for you and provide you an in-depth analysis of customer interactions.
+    </p>
   </div>
 
-  <%= form.submit %>
-<% end %>
+  <%= render "form" %>
 
-<% if local_assigns[:response].present? %>
-  <div id="response">
-    <div><strong>groq response:</strong> <%= response %></div>
   </div>
-<% end %>
+</section>

@@ -1,44 +1,46 @@
+require "faraday"
+require "faraday/multipart"
+
 class CompanionsController < ApplicationController
-  def index
-    @uuid = SecureRandom.uuid
-  end
+  before_action :generate_uuid, only: :index
+  before_action :groq_api_key, only: :groq_request
 
   def groq_request
     file = ImportFileHandlerService.new.import(params[:groq_request][:file])
 
     if file[:content_type] == "audio/mpeg"
-      TranscriptionJob.perform_later(groq_request_params.merge(file: file[:file_path].to_s))
+      GroqRequestJob.perform_later(groq_request_params.merge(file: file[:file_path].to_s, groq_api_key: @groq_api_key))
     else
-      generated_response = CompanionService.new.analyze("Can you please analyze and give me the name of the agent who's most efficient to least efficient? and how they can improve, how many time same tickets are returning to them? Please follow the this format and don't leave any more messages at the starafter the recommendation. Please don't include any names on your analysis, if possible, use 3rd person. or whatever you think is a red flag on the record<h1> Analysis </h1><h2> good </h2><ul>
-    <li><p>The representative, Katya, greeted the customer, Sir Raul, and identified herself.</p></li>
-    <li><p>She listened to the customer's concern and asked for the necessary information (PL number or telephone line connected to DSL) to assist him.</p></li>
-    <li><p>She empathized with the customer's frustration and acknowledged the hassle caused by the issue.</p></li></ul><h2>
-    Bad</h2><h2> Red flags </h2>Here is the conversation, I only need html formats, don't include any other formats such as json: \n#{file[:processed_rows]}", "no transcript")
-      uuid = groq_request_params[:uuid]
+      record = Record.new
+      user_response = record.generate_response_user_role("#{groq_request_params[:prompt]}\n#{groq_request_params[:format]}\n#{file}")
+      system_response = record.generate_response_system_role("#{groq_request_params[:prompt]}\n#{groq_request_params[:format]}\n#{file}")
 
-      Turbo::StreamsChannel.broadcast_update_to("channel_#{uuid}", target: "groq_output", partial: "groq/output", locals: { generated_response: })
+      generated_response = "#{user_response}\n\n#{system_response}"
+
+      Turbo::StreamsChannel.broadcast_update_to("channel_#{groq_request_params[:uuid]}", target: "companion_output", partial: "groq/output", locals: { transcript: file, generated_response: })
     end
 
     head :no_content
   end
 
-  def import
-    return redirect_to request.referrer, notice: "No file added" if params[:file].nil?
-    # return redirect_to request.referrer, notice: "Only csv files allowed" unless params[:file].content_type == "text/csv"
-
-    # csv = CsvImportService.new.call(params[:file])
-    file = ImportFileHandlerService.new.import(params[:file])
-    binding.b
-
-    GroqRequestJob.perform_later(groq_request_params.merge(file: file.to_s), @groq_api_key)
-
-    head :no_content
-
-    # redirect_to request.referer, notice: "Import started..."
-  end
-
   private
     def groq_request_params
       params.require(:groq_request).permit(:prompt, :format, :file, :uuid)
+    end
+
+    def transcribe
+      Faraday.new(url: "https://api.groq.com/openai/v1/audio/transcriptions") do |faraday|
+          faraday.request :multipart
+          faraday.request :url_encoded
+          faraday.adapter Faraday.default_adapter
+      end
+    end
+
+    def groq_api_key
+      @groq_api_key = ENV["GROQ_API_KEY"]
+    end
+
+    def generate_uuid
+      @uuid = SecureRandom.uuid
     end
 end

@@ -1,0 +1,22 @@
+<% cache record do %>
+<tr class="bg-white transition-all duration-500 hover:bg-gray-50">
+  <td class="p-5 whitespace-nowrap text-sm leading-6 font-medium text-gray-900"><%= link_to record.uid, record %></td>
+  <td class="p-5 whitespace-nowrap text-sm leading-6 font-medium text-gray-900 "><%= record.file.nil? ? "No attachment" : record.file.content_type %>
+  <td class="p-5 whitespace-nowrap text-sm leading-6 font-medium text-gray-900"><%= record.transcript? ? "Has transcript" : "No transcript" %></td>
+  <td class="p-5 whitespace-nowrap text-sm leading-6 font-medium text-gray-900"><%= time_tag record.created_at, "data-local": "time-ago" %></td>
+  <td class="p-5">
+    <div class="flex items-center gap-1">
+      <%= link_to edit_record_path(record) do %>
+        <button class="p-2 rounded-full group transition-all duration-500 flex item-center">
+          <%= image_tag "write.svg" %>
+        </button>
+      <% end %>
+      <%= link_to record, data: { turbo_method: :delete, "turbo_confirm": "Are you sure?" } do %>
+        <button class="p-2 rounded-full group transition-all duration-500 flex item-center">
+          <%= image_tag "trash.svg" %>
+        </button>
+      <% end %>
+    </div>
+  </td>
+</tr>
+<% end %>

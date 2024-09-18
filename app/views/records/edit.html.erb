@@ -1,0 +1,53 @@
+<% content_for(:title) { "Edit record" } %>
+
+<section class="text-indigo">
+  <div class="wrap mx-auto px-4 pb-14 md:pb-20 flex flex-col items-center">
+    <header class="md:mx-auto md:text-center mt-8 md:mt-16 mb-10 md:mb-16">
+      <h1 class="text-3.5xl md:text-5xl leading-10">
+        Edit record
+      </h1>
+    </header>
+
+    <p class="md:text-xl max-w-3xl -mt-8">
+      I am your <span class="font-apple">intelligent cx</span> companion designed to help teams optimize their process of customer interaction quality. Simply upload your files, and I'll transcribe and process it for you and provide you an in-depth analysis of customer interactions.
+    </p>
+  </div>
+
+  <div class="max-w-2xl mx-auto p-4">
+
+    <%= form_with model: @record, local: true, html: { multipart: true } do |form| %>
+      <div class="mb-4">
+        <label for="transcript" class="block text-lg font-medium text-indigo mb-1">UUID</label>
+        <%= form.text_field :uid, readonly: true, class: "w-full px-4 py-2 border border-[#303e7b] rounded-md focus:outline-none focus:border-[#303e7b] text-indigo bg-transparent" %>
+      </div>
+
+      <% if @record.transcript? %>
+      <div class="mb-4">
+        <label for="transcript" class="block text-lg font-medium text-indigo mb-1">Transcript</label>
+        <div class="w-full px-4 py-2 border border-[#303e7b] rounded-md focus:outline-none focus:border-[#303e7b] text-indigo bg-transparent">
+          <%= @record.transcript %>
+        </div>
+      </div>
+      <% end %>
+
+      <div class="mb-4">
+        <label for="title" class="block text-lg font-medium text-indigo mb-1">Analysis</label>
+        <%= form.rich_text_area :analysis, required: true, class: "w-full px-4 py-2 border border-[#303e7b] rounded-md focus:outline-none focus:border-[#303e7b] text-indigo bg-transparent" %>
+      </div>
+
+      <div class="w-full px-4 py-2 border border-[#303e7b] rounded-md focus:outline-none focus:border-[#303e7b] text-indigo bg-transparent mb-4">
+        <label for="title" class="block text-lg font-medium text-indigo mb-1">File (MPEG/CSV)</label>
+        <% if @record.file.attached? %>
+          <!-- Display the current file name -->
+          <p class="mb-2 text-indigo-600">Current file: <%= @record.file.filename.to_s %></p>
+        <% else %>
+          <p class="mb-2 text-indigo-600">No file uploaded yet.</p>
+        <% end %>
+
+      </div>
+
+      <%= form.submit class: "w-full bg-[#303e7b] rounded-md px-5 py-3 text-white hover:bg-indigo-300 w-52 cursor-pointer" %>
+    <% end %>
+  </div>
+  </div>
+</section>

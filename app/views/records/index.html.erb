@@ -1,14 +1,80 @@
-<%= render "form" %>
+<% content_for(:title) { "Records" } %>
 
-<audio controls>
-  <source src="<%= url_for(Record.last.file) %>" type="audio/mpeg">
-  Your browser does not support the audio element.
-</audio>
+<div class="mt-6 divide-y-2 divide-[#303e7b] text-indigo">
 
-<%#= Record.last.file_attachment %>
+<% unless Record.any? %>
+  <section>
+    <div class="wrap mx-auto px-4 pb-14 md:pb-20 flex flex-col items-center">
+      <header class="md:mx-auto md:text-center mt-8 md:mt-16 mb-10 md:mb-16">
+        <h1 class="text-3.5xl md:text-5xl leading-10">
+          Add new record
+        </h1>
+      </header>
 
-<%#= url_for(Record.last.file) %>
+      <p class="md:text-xl max-w-3xl -mt-8 mb-16">
+        I am your <span class="font-apple">intelligent cx</span> companion designed to help teams optimize their process of customer interaction quality. Simply upload your files, and I'll transcribe and process it for you and provide you an in-depth analysis of customer interactions.
+      </p>
 
-<%= Record.last&.transcript %>
+      <div class="container flex flex-wrap justify-between items-center mx-auto bg-transparent rounded-md md:px-64">
+      <div class="text-center border-dashed border-2 border-[#303e7b] rounded-md w-full p-20">
+        <i class='bx bxs-contact bx-lg mb-5'></i>
+        <p class="text-xl mb-2 uppercase font-bold">No records</p>
+        <span class="text-m text-indigo block mb-10">Get started by creating a new record</span>
+        <%= link_to "Add record", new_record_path, class: "bg-[#303e7b] rounded-md px-5 py-3 text-white hover:bg-indigo-300 w-52" %>
+        </div>
+    </div>
+    </div>
+  </section>
+<% end %>
 
-<%= Record.last&.analysis %>
+<section>
+  <div class="mx-auto px-4 sm:px-12 xl:max-w-6xl xl:px-0 mt-24">
+    <div class="z-10">
+      <h1 class="relative text-center text-4xl font-bold text-indigo sm:text-5xl md:text-6xl">
+        <span class="relative">
+          <%= image_tag "underline.svg", class: "absolute inset-x-0 -bottom-1 w-full opacity-50" %>
+          <span class="relative px-2 text-indigo">Companion</span>
+        </span>
+        in quality
+      </h1>
+      <p class="mx-auto mt-6 text-center text-indigo md:w-2/3 lg:w-1/2 md:text-xl">
+      I am your <span class="font-apple">intelligent cx</span> companion designed to help teams optimize their process of customer interaction quality. Simply upload your files, and I'll transcribe and process it for you and provide you an in-depth analysis of customer interactions.
+      </p>
+
+      <%= link_to "Add record", new_record_path, class: "bg-[#303e7b] rounded-md px-5 py-3 text-white hover:bg-indigo-800 w-52 relative z-10 mx-auto mt-10 flex items-center gap-4  sm:w-4/5 md:w-3/5 lg:w-2/5 text-center" %>
+    </div>
+  </div>
+</div>
+<section>
+
+<section class="mx-auto px-4 sm:px-12 xl:max-w-6xl xl:px-0 mt-24">
+<div class="flex flex-col">
+  <div class="overflow-x-auto">
+    <div class="min-w-full inline-block align-middle">
+      <div class="overflow-hidden">
+        <table class="min-w-full rounded-xl">
+          <thead>
+            <tr class="bg-gray-50">
+              <th scope="col" class="p-5 text-left text-sm leading-6 font-semibold text-gray-900 capitalize rounded-t-xl">UID</th>
+              <th scope="col" class="p-5 text-left text-sm leading-6 font-semibold text-gray-900 capitalize">File attachment</th>
+              <th scope="col" class="p-5 text-left text-sm leading-6 font-semibold text-gray-900 capitalize">Transcription</th>
+              <th scope="col" class="p-5 text-left text-sm leading-6 font-semibold text-gray-900 capitalize">Analysis</th>
+              <th scope="col" class="p-5 text-left text-sm leading-6 font-semibold text-gray-900 capitalize rounded-t-xl"><span sr-only="actions"></span></th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-gray-300">
+            <%= render @records %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+
+<%= turbo_stream_from "records" %>
+
+<div id="record_output">
+  <%= render partial: "records/output", locals: { transcript: "", generated_response: "" } %>
+</div>
+

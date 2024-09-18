@@ -1,9 +1,31 @@
-<%= form_for :groq_request, url: groq_request_path, method: :post, remote: true do |form| %>
+<%= form_for :groq_request, url: groq_request_path, method: :post, remote: true, class: "relative grid rounded-md border border-[#303e7b] bg-transparent p-1 px-2 shadow-md focus-within:ring-2 md:p-2 lg:pr-3 mt-12" do |form| %>
+
   <%= form.hidden_field :uuid, value: @uuid %>
 
-  <div class="group">
-    <%= form.file_field :file, class: "" %>
+  <div class="mb-2">
+    <%= form.textarea :prompt, value: "Please analyze the customer representative's recordings.", rows: "2", class: "w-full rounded-md bg-transparent p-4 text-indigo outline-none", required: true %>
   </div>
 
-  <%= form.submit %>
+  <div class="mb-2">
+    <%= form.textarea :format, value: "Return your analysis in the following format:
+    Good
+    • Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+    • Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+    •Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+    Bad
+    • Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+    • Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+    •Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+    ", rows: "16", class: "w-full rounded-md bg-transparent p-4 text-indigo outline-none", readonly: true %>
+  </div>
+
+  <div class="mb-4">
+    <label for="image" class="block text-lg font-normal text-indigo mb-1">File</label>
+    <%= form.file_field :file, class: "block w-full text-sm text-indigo border border-[#303e7b] rounded cursor-pointer bg-transparent p-3",  required: true %>
+  </div>
+
+  <div class="flex justify-end">
+      <button type="submit" class="px-6 py-2 bg-[#303e7b] text-white font-normal rounded-md hover:bg-indigo-600 focus:outline-none cursor-pointer">Transcribe & Analyze</button>
+  </div>
 <% end %>
+

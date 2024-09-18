@@ -198,6 +198,7 @@ GEM
       thor (~> 1.2)
       zeitwerk (~> 2.5)
     language_server-protocol (3.17.0.3)
+    local_time (3.0.2)
     logger (1.6.1)
     loofah (2.22.0)
       crass (~> 1.0.2)
@@ -430,6 +431,7 @@ DEPENDENCIES
   importmap-rails
   jbuilder
   kamal
+  local_time
   propshaft
   puma (>= 5.0)
   rails!

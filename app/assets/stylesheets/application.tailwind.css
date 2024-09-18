@@ -1,13 +1,52 @@
+@import url('https://fonts.googleapis.com/css2?family=SUSE:wght@100..800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Homemade+Apple&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/*
-
-@layer components {
-  .btn-primary {
-    @apply py-2 px-4 bg-blue-200;
-  }
+/* Styling for paragraphs */
+.trix-content div, p {
+  @apply text-base text-[#303E7B] leading-relaxed mb-1 text-xl;
 }
 
-*/
+.trix-content b, strong {
+  @apply text-base font-semibold text-[#303E7B] leading-relaxed mb-1 text-xl;
+}
+
+/* Styling for bullet lists */
+.trix-content ul {
+  @apply list-disc list-inside pl-5 mb-1 text-xl text-[#303E7B];
+}
+
+/* Styling for numbered lists */
+.trix-content ol {
+  @apply list-decimal list-inside pl-5 mb-1 text-xl text-[#303E7B] ;
+}
+
+/* Styling for list items */
+.trix-content li {
+  @apply text-base text-[#303E7B];
+}
+
+/* Heading styles */
+.trix-content h1 {
+  @apply text-4xl font-bold text-[#303E7B] mb-1 text-xl;
+}
+
+.trix-content h2 {
+  @apply text-3xl font-semibold text-[#303E7B] mb-1 text-xl;
+}
+
+.trix-content h3 {
+  @apply text-2xl font-medium text-[#303E7B] mb-1 text-xl;
+}
+
+/* Additional styling for blockquotes, code, etc. */
+.trix-content blockquote {
+  @apply italic text-[#303E7B] border-l-4 border-[#303e7b] pl-4 mb-1 text-xl;
+}
+
+.trix-content pre {
+  @apply bg-[#303e7b] text-white p-4 rounded-md text-xl font-mono overflow-x-auto mb-1;
+}

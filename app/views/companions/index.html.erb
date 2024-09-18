@@ -1,24 +1,31 @@
-<div>
-  <h1 class="text-3xl font-bold underline">
-      Hello, cxmpanion!
-  </h1>
-  <%#= render partial: "groq/form", locals: { uuid: @uuid } %>
+<section class="pt-32 sm:pt-40 md:pt-48">
+  <div class="mx-auto px-4 sm:px-12 xl:max-w-6xl xl:px-0">
+    <div class="relative">
+      <h1 class="text-center text-5xl font-bold text-gray-600 sm:text-6xl lg:text-left lg:text-7xl">
+        Import, Transcribe,
+        <span class="relative">
+          <%= image_tag "underline.svg", class: "absolute inset-x-0 -bottom-1 w-full opacity-50" %>
+          <span class="relative text-indigo">Analyze</span>
+        </span>
+      </h1>
 
-  <%= turbo_stream_from "channel_#{@uuid}" %>
+      <div class="relative items-center gap-12 lg:flex">
+        <div class="text-center sm:mx-auto sm:w-11/12 md:mt-12 md:w-4/5 lg:mt-0 lg:mr-auto lg:w-6/12 lg:text-left">
+          <p class="mt-12 text-lg text-indigo sm:text-xl">
+            I am your <span class="font-apple">intelligent cx</span> companion designed to help teams optimize their process of customer interaction quality. Simply upload your files, and I'll transcribe and process it for you and provide you an in-depth analysis of customer interactions.
+          </p>
 
-  <div id="groq_output">
-    <%#= render partial: "groq/output", locals: { generated_response: "" } %>
+        </div>
+        <div class="mt-12 w-full overflow-hidden sm:mt-20 lg:mt-12 lg:w-6/12">
+          <%= render "groq/form" %>
+        </div>
+      </div>
+    </div>
   </div>
+</section>
+
+<%= turbo_stream_from "channel_#{@uuid}" %>
+
+<div id="companion_output">
+  <%= render partial: "groq/output", locals: { transcript: "", generated_response: "" } %>
 </div>
-
-<%#= Record.first.analysis if Record.any? %>
-
-<%# = render "import" %>
-
-<%#= Record.last.analysis if Record.any? %>
-
-
-<audio controls>
-  <source src="<%#= url_for(Record.last.file) %>" type="audio/mpeg">
-Your browser does not support the audio element.
-</audio>
