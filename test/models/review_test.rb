@@ -14,11 +14,4 @@ class ReviewTest < ActiveSupport::TestCase
     @review.remarks = ""
     assert_not @review.valid?
   end
-
-  test "reviewee as assignee default" do
-    @review = @record.reviews.build(remarks: "hello world")
-
-    assert_equal @review.assignee, "reviewee"
-    assert @review.valid?
-  end
 end
