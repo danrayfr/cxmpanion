@@ -37,15 +37,10 @@
             <div class="text-5xl md:text-6xl md:pb-6">🫠</div>
             <h3 class="md:text-xl font-medium mb-2">Reviewee Remarks</h3>
             <div class="text-left">
-              <%= link_to "Review as reviewee", [:new, @record, :review, assignee: "reviewee" ], class: "underline" unless @record.reviews.reviewee.any?%>
+              <%= link_to "Add Review as reviewee", [:new, @record, :review, assignee: "reviewee" ], class: "underline" unless @record.reviews.reviewee.any?%>
 
-              <% @record.reviews.reviewee.each do |review| %>
-                <p class="md:text-xl"><%= link_to review.remarks, [:edit, @record, review] %></p>
-                <p class="md:text-xl">by <%= review.name? ? review.name : "reviewee" %></p>
-                <div>
-                  <span class="md:text-xl"><%= link_to "Edit", [:edit, @record, review] %></span>
-                  <span class="md:text-xl"><%= link_to "Delete", [:edit, @record, review] %></span>
-                </div>
+              <% @record.reviews.reviewee.ordered.each do |review| %>
+                <%= render "reviews/review", review: review %>
               <% end %>
             </div>
           </div>
@@ -54,24 +49,19 @@
           <div class="text-center p-4 md:p-10 md:px-14 lg:p-14 md:pb-16 lg:pb-20">
             <div class="text-5xl md:text-6xl md:pb-6">🐻</div>
             <h3 class="md:text-xl font-medium mb-2">Reviewer Remarks</h3>
-            <div class="text-left">
-              <%= link_to "Review as reviewer", [:new, @record, :review, assignee: "reviewer" ], class: "underline" %>
-              <% @record.reviews.reviewer.each do |review| %>
-                <p class="md:text-xl"><%= link_to review.remarks, [:edit, @record, review] %></p>
-                <p class="md:text-xl">by <%= review.name? ? review.name : "reviewer" %></p>
-                <div>
-                  <span class="md:text-xl"><%= link_to "Edit", [:edit, @record, review] %></span>
-                  <span class="md:text-xl"><%= link_to "Delete", [@record, review], data: { turbo_method: :delete, "turbo_confirm": "Are you sure?" } %></span>
-                </div>
+            <div class="text-left mb-2">
+              <%= link_to "Add Review as reviewer", [:new, @record, :review, assignee: "reviewer" ], class: "underline" %>
+              <% @record.reviews.reviewer.ordered.each do |review| %>
+                <%= render "reviews/review", review: review %>
               <% end %>
             </div>
           </div>
           <div class="text-center p-4 md:p-10 md:px-14 lg:p-14 md:pb-16 lg:pb-20">
             <div class="text-5xl md:text-6xl md:pb-6">🤖</div>
             <h3 class="md:text-xl font-medium mb-2">
-              Groq AI Remarks
+              Companion Remarks
             </h3>
-            <div class="text-left">
+            <div class="md:text-xl text-left">
               <%= @record.analysis %>
             </div>
           </div>

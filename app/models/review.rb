@@ -5,6 +5,8 @@ class Review < ApplicationRecord
   validates_presence_of :remarks, :assignee
   before_create :one_reviewee_per_record, if: -> { assignee == "reviewee" }
 
+  scope :ordered, -> { order(created_at: :desc) }
+
   private
 
   def one_reviewee_per_record
