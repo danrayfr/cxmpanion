@@ -7,6 +7,8 @@ Rails.application.routes.draw do
     resources :reviews, except: %i[ index show ]
   end
 
+  resources :prompt_templates, except: :show
+
   get "up" => "rails/health#show", as: :rails_health_check
 
   # Render dynamic PWA files from app/views/pwa/* (remember to link manifest in application.html.erb)

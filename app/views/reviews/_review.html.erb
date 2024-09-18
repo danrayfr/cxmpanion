@@ -1,5 +1,5 @@
 <div class="mb-4">
-  <p class="md:text-xl"><%= link_to review.remarks, [:edit, @record, review] %></p>
+  <p class="md:text-xl"><%= review.remarks %></p>
   <p class="md:text-xl">by <%= review.name? ? review.name : "reviewer" %></p>
   <i>Added <%= time_tag review.created_at, "data-local": "time-ago" %></i>
   <div>

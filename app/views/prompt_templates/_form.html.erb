@@ -1,0 +1,22 @@
+<div class="max-w-2xl mx-auto p-4">
+
+  <%= form_with model: @prompt_template do |form| %>
+    <div class="mb-4">
+      <label for="name" class="block text-lg font-medium text-indigo mb-1">Task</label>
+      <%= form.text_field :name, required: true, class: "w-full px-4 py-2 border border-[#303e7b] rounded-md focus:outline-none focus:border-[#303e7b] text-indigo bg-transparent", rows: "4" %>
+    </div>
+
+    <div class="mb-4">
+      <label for="task" class="block text-lg font-medium text-indigo mb-1">Task</label>
+      <%= form.text_area :task, required: true, class: "w-full px-4 py-2 border border-[#303e7b] rounded-md focus:outline-none focus:border-[#303e7b] text-indigo bg-transparent", rows: "4" %>
+    </div>
+
+    <div class="mb-4">
+      <label for="title" class="block text-lg font-medium text-indigo mb-1">Format</label>
+      <%= form.rich_text_area :format, required: true, class: "w-full px-4 py-2 border border-[#303e7b] rounded-md focus:outline-none focus:border-[#303e7b] text-indigo bg-transparent" %>
+    </div>
+
+    <%= form.submit class: "w-full bg-[#303e7b] rounded-md px-5 py-3 text-white hover:bg-indigo-300 w-52 cursor-pointer" %>
+  <% end %>
+
+</div>

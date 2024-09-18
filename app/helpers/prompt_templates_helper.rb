@@ -1,0 +1,2 @@
+module PromptTemplatesHelper
+end
