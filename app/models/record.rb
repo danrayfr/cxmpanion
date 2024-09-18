@@ -3,6 +3,8 @@ class Record < ApplicationRecord
   has_rich_text :transcript
   has_rich_text :analysis
 
+  has_many :reviews, dependent: :destroy
+
   before_create { self.uid = generate_uid }
 
   scope :ordered, -> { order(created_at: :desc) }

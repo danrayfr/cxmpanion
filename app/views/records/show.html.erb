@@ -11,10 +11,10 @@
         </header>
 
         <div class="mx-auto mt-6 text-center text-indigo md:w-2/3 lg:w-1/2 md:text-xl mb-8">
-          <p> Created <%= time_tag @record.created_at, "data-local": "time-ago" %></p>
-
+          <p>
+            Created <%= time_tag @record.created_at, "data-local": "time-ago" %>
+          </p>
           <p><%= @record.transcript %></p>
-
         </div>
 
         <div class="md:px-16 w-full">
@@ -30,23 +30,40 @@
             <div class="text-5xl md:text-6xl md:pb-6">💯</div>
             <h3 class="md:text-xl font-medium mb-2">Ratings</h3>
             <div class="text-left">
-              <%= @record.analysis %>
+
             </div>
           </div>
           <div class="text-center p-4 md:p-10 md:px-14 lg:p-14 md:pb-16 lg:pb-20">
             <div class="text-5xl md:text-6xl md:pb-6">🫠</div>
-            <h3 class="md:text-xl font-medium mb-2">Reviewee</h3>
+            <h3 class="md:text-xl font-medium mb-2">Reviewee Remarks</h3>
             <div class="text-left">
-              <%= @record.analysis %>
+              <%= link_to "Review as reviewee", [:new, @record, :review, assignee: "reviewee" ], class: "underline" unless @record.reviews.reviewee.any?%>
+
+              <% @record.reviews.reviewee.each do |review| %>
+                <p class="md:text-xl"><%= link_to review.remarks, [:edit, @record, review] %></p>
+                <p class="md:text-xl">by <%= review.name? ? review.name : "reviewee" %></p>
+                <div>
+                  <span class="md:text-xl"><%= link_to "Edit", [:edit, @record, review] %></span>
+                  <span class="md:text-xl"><%= link_to "Delete", [:edit, @record, review] %></span>
+                </div>
+              <% end %>
             </div>
           </div>
         </div>
         <div class="grid grid-cols-2 divide-x-2 divide-[#303e7b]">
           <div class="text-center p-4 md:p-10 md:px-14 lg:p-14 md:pb-16 lg:pb-20">
             <div class="text-5xl md:text-6xl md:pb-6">🐻</div>
-            <h3 class="md:text-xl font-medium mb-2">Reviewer</h3>
+            <h3 class="md:text-xl font-medium mb-2">Reviewer Remarks</h3>
             <div class="text-left">
-              <%= @record.analysis %>
+              <%= link_to "Review as reviewer", [:new, @record, :review, assignee: "reviewer" ], class: "underline" %>
+              <% @record.reviews.reviewer.each do |review| %>
+                <p class="md:text-xl"><%= link_to review.remarks, [:edit, @record, review] %></p>
+                <p class="md:text-xl">by <%= review.name? ? review.name : "reviewer" %></p>
+                <div>
+                  <span class="md:text-xl"><%= link_to "Edit", [:edit, @record, review] %></span>
+                  <span class="md:text-xl"><%= link_to "Delete", [@record, review], data: { turbo_method: :delete, "turbo_confirm": "Are you sure?" } %></span>
+                </div>
+              <% end %>
             </div>
           </div>
           <div class="text-center p-4 md:p-10 md:px-14 lg:p-14 md:pb-16 lg:pb-20">

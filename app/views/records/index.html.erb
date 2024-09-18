@@ -27,6 +27,7 @@
   </section>
 <% end %>
 
+<% if Record.any? %>
 <section>
   <div class="mx-auto px-4 sm:px-12 xl:max-w-6xl xl:px-0 mt-24">
     <div class="z-10">
@@ -71,6 +72,8 @@
   </div>
 </div>
 </section>
+
+<% end %>
 
 <%= turbo_stream_from "records" %>
 

@@ -3,7 +3,9 @@ Rails.application.routes.draw do
 
   post "groq_request", to: "companions#groq_request"
 
-  resources :records
+  resources :records do
+    resources :reviews, except: %i[ index show ]
+  end
 
   get "up" => "rails/health#show", as: :rails_health_check
 

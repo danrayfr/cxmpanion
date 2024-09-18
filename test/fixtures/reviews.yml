@@ -1,7 +1,9 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  uid: 74715f49-6baa-4c47-a0eb-8583ee1ecdfb
+  assignee: reviewee
+  record: one
 
 two:
-  uid: 74715f49-6baa-4c47-a0eb-8583ee1ecdfb
+  assignee: reviewer
+  record: two
