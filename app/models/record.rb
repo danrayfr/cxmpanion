@@ -4,6 +4,7 @@ class Record < ApplicationRecord
   has_rich_text :analysis
 
   has_many :reviews, dependent: :destroy
+  has_one :rating, dependent: :destroy
 
   before_create { self.uid = generate_uid }
 

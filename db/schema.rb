@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2024_09_18_144531) do
+ActiveRecord::Schema[8.0].define(version: 2024_09_18_221034) do
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.string "name", null: false
     t.text "body"
@@ -56,6 +56,15 @@ ActiveRecord::Schema[8.0].define(version: 2024_09_18_144531) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "ratings", force: :cascade do |t|
+    t.integer "score"
+    t.json "metrics"
+    t.integer "record_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["record_id"], name: "index_ratings_on_record_id"
+  end
+
   create_table "records", force: :cascade do |t|
     t.string "uid", null: false
     t.datetime "created_at", null: false
@@ -73,5 +82,6 @@ ActiveRecord::Schema[8.0].define(version: 2024_09_18_144531) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "ratings", "records"
   add_foreign_key "reviews", "records"
 end

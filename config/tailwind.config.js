@@ -11,7 +11,7 @@ module.exports = {
     extend: {
       fontFamily: {
         sans: ["SUSE", "system-ui"],
-        apple: ["Homemade Apple", "cursive"],
+        sacramento: ["Sacramento", "cursive"],
       },
     },
   },
