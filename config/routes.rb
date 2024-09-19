@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   end
 
   resources :prompt_templates
+  resources :rating_templates
 
   get "up" => "rails/health#show", as: :rails_health_check
 

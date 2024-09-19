@@ -1,6 +1,16 @@
-<p>Score: <%= @record.rating.score %></p>
+<p class="text-5xl font-bold">Score: <%= @record.rating.score %></p>
 <p><%= @record.rating.remarks %></p>
-<p><%= @record.rating.metrics.present? ? @record.rating.metrics : "" %></p>
+<p>
+  <% if @record.rating.metrics.present? %>
+    <% @record.rating.metrics.each do |metric| %>
+      <ul>
+        <p class="capitalize"><%= metric["metric_name"] %></p>
+        <li><%= metric["deduction"] %></li>
+        <li><%= metric["content"] %></li>
+      </ul>
+    <% end %>
+  <% end %>
+</p>
 <div>
   <span class="md:text-xl"><%= link_to "Edit", [:edit, @record, @record.rating] %></span>
   <span class="md:text-xl"><%= link_to "Delete", [@record, @record.rating], data: { turbo_method: :delete, "turbo_confirm": "Are you sure?" } %></span>

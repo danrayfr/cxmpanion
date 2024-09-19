@@ -1,0 +1,48 @@
+<div class="max-w-2xl mx-auto p-4">
+
+  <%= form_with model: @rating_template, data: { controller: 'nested-form', nested_form_wrapper_selector_value: '.nested-form-wrapper' } do |form| %>
+    <div class="mb-4">
+      <label for="name" class="block text-lg font-medium text-indigo mb-1">Name</label>
+      <%= form.text_field :name, required: true, class: "w-full px-4 py-2 border border-[#303e7b] rounded-md focus:outline-none focus:border-[#303e7b] text-indigo bg-transparent", rows: "4" %>
+    </div>
+
+    <div class="mb-4">
+      <label for="title" class="block text-lg font-medium text-indigo mb-1">Remarks</label>
+      <%= form.rich_text_area :remarks, required: true, class: "w-full px-4 py-2 border border-[#303e7b] rounded-md focus:outline-none focus:border-[#303e7b] text-indigo bg-transparent" %>
+    </div>
+
+    <% if @rating_template.persisted? %>
+      <p>Metrics</p>
+      <% @rating_template.metrics.each_with_index do |metric| %>
+        <p class="capitalize">
+          <%= metric["metric_name"] %>
+          <%= metric["deduction"] %>
+          <%= metric["content"] %>
+        </p>
+      <% end %>
+    <% end %>
+
+    <% if @rating_template.new_record? %>
+      <div class="mb-6">
+        <label class="mb-3 block text-base font-medium text-[#07074D]" for="service_available_time">Metrics</label>
+
+        <template data-nested-form-target="template">
+          <%= form.fields_for :metrics, child_index: 'NEW_RECORD' do |metric| %>
+          <%= render "metric_form" %>
+          <% end %>
+        </template>
+      </div>
+
+      <div class="mb-6">
+        <div data-nested-form-target="target"></div>
+      </div>
+
+      <div class="mb-6">
+        <button type="button" data-action="nested-form#add">Add New Metrics</button>
+      </div>
+      <% end %>
+
+    <%= form.submit class: "w-full bg-[#303e7b] rounded-md px-5 py-3 text-white hover:bg-indigo-300 w-52 cursor-pointer" %>
+  <% end %>
+
+</div>

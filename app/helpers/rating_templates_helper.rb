@@ -1,0 +1,2 @@
+module RatingTemplatesHelper
+end

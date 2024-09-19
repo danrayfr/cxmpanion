@@ -12,7 +12,7 @@ class ReviewsController < ApplicationController
     if @review.save
       redirect_to @record, notice: "Reviewed."
     else
-      redirect_to [ :new, @record, @review ], status: :unprocessable_entity
+      redirect_to :new, status: :unprocessable_entity
     end
   end
 
@@ -23,7 +23,7 @@ class ReviewsController < ApplicationController
     if @review.update(review_params)
       redirect_to @record, notice: "Updated."
     else
-      redirect_to [ :edit, @record, @review ], status: :unprocessable_entity
+      redirect_to :edit, status: :unprocessable_entity
     end
   end
 
