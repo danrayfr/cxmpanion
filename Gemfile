@@ -65,7 +65,7 @@ group :test do
 end
 
 gem "groq", "~> 0.3.2"
-gem "faraday", "~> 2.7"
+gem "faraday", "~> 2.12"
 gem "faraday-multipart"
 gem "csv"
 gem "dotenv-rails"
