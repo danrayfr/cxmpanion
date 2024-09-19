@@ -71,9 +71,6 @@
     </div>
   </div>
 </div>
-</section>
-
-<% end %>
 
 <%= turbo_stream_from "records" %>
 
@@ -81,3 +78,6 @@
   <%= render partial: "records/output", locals: { transcript: "", generated_response: "" } %>
 </div>
 
+
+</section>
+<% end %>
