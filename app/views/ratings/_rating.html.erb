@@ -1,0 +1,7 @@
+<p>Score: <%= @record.rating.score %></p>
+<p><%= @record.rating.remarks %></p>
+<p><%= @record.rating.metrics.present? ? @record.rating.metrics : "" %></p>
+<div>
+  <span class="md:text-xl"><%= link_to "Edit", [:edit, @record, @record.rating] %></span>
+  <span class="md:text-xl"><%= link_to "Delete", [@record, @record.rating], data: { turbo_method: :delete, "turbo_confirm": "Are you sure?" } %></span>
+</div>

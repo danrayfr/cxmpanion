@@ -1,0 +1,17 @@
+<%= form_with model: [@record, @rating]  do |form| %>
+  <div class="mb-4">
+    <label for="score" class="block text-lg font-medium text-indigo mb-1">Score</label>
+    <%= form.text_field :score, required: true, class: "w-full px-4 py-2 border border-[#303e7b] rounded-md focus:outline-none focus:border-[#303e7b] text-indigo bg-transparent capitalize" %>
+  </div>
+
+  <div class="mb-4">
+    <label for="title" class="block text-lg font-medium text-indigo mb-1">Remarks</label>
+    <%= form.rich_text_area :remarks, required: true, class: "w-full px-4 py-2 border border-[#303e7b] rounded-md focus:outline-none focus:border-[#303e7b] text-indigo bg-transparent" %>
+  </div>
+
+  <div id="metric-checkboxes" data-quality-form-target="metricCheckboxes"></div>
+
+  <div id="metric-forms" data-quality-form-target="metricForms" data-controller="nested-form" nested-form-wrapper-selector-value=".nested-form-wrapper"></div>
+
+  <%= form.submit class: "w-full bg-[#303e7b] rounded-md px-5 py-3 text-white hover:bg-indigo-300 w-52 cursor-pointer" %>
+<% end %>

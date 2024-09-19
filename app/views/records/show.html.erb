@@ -30,6 +30,10 @@
             <div class="text-5xl md:text-6xl md:pb-6">💯</div>
             <h3 class="md:text-xl font-medium mb-2">Ratings</h3>
             <div class="text-left">
+              <%= link_to "Add Rating", [:new, @record, :rating ], class: "underline" if @record.rating.nil? %>
+              <div class="md:text-xl text-left">
+                <%= render "ratings/rating", rating: @record.rating if @record.rating.present? %>
+              </div>
 
             </div>
           </div>

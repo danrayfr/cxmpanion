@@ -1,6 +1,7 @@
 class ReviewsController < ApplicationController
   before_action :set_record
   before_action :set_review, only: %i[ edit update destroy ]
+
   def new
     @review = @record.reviews.build
   end
@@ -11,7 +12,7 @@ class ReviewsController < ApplicationController
     if @review.save
       redirect_to @record, notice: "Reviewed."
     else
-      redirect_to @record, status: :unprocessable_entity
+      redirect_to [ :new, @record, @review ], status: :unprocessable_entity
     end
   end
 
@@ -33,7 +34,7 @@ class ReviewsController < ApplicationController
 
   private
     def review_params
-      params.require(:review).permit(:assignee, :name, :remarks)
+      params.require(:review).permit(:assignee, :name, :remarks, :record_id)
     end
 
     def set_record

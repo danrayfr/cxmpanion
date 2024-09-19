@@ -5,6 +5,7 @@ Rails.application.routes.draw do
 
   resources :records do
     resources :reviews, except: %i[ index show ]
+    resources :ratings, except: %i[ index show ]
   end
 
   resources :prompt_templates
