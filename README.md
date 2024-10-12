@@ -11,7 +11,7 @@ CXMPANION
   <p align="center">
     An AI-powered Transcriber and Analyzer for Quality Assurance framework in Service Delivery.
     <br />
-      <a href="https://www.linkedin.com/pulse/cxmpanion-dan-ray-rollan-0vlvc/?trackingId=qvzEvOADSTud4d1n82nJnw%3D%3D"><strong>Explore the docs »</strong></a>
+      <a href="https://www.linkedin.com/pulse/cxmpanion-dan-ray-rollan-0vlvc/?trackingId=qvzEvOADSTud4d1n82nJnw%3D%3D"><strong>Explore the Article »</strong></a>
     <br />
     <br />
     <a href="https://www.youtube.com/watch?v=juYQHdaPnQ4">View Demo</a>
