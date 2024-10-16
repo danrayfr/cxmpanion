@@ -70,5 +70,5 @@ gem "faraday-multipart"
 gem "csv"
 gem "dotenv-rails"
 
-gem "tailwindcss-rails", "~> 2.7"
+gem "tailwindcss-rails", "~> 3.0"
 gem "local_time"
