@@ -36,17 +36,6 @@ class GroqRequestJob < ApplicationJob
         }
       end
 
-      # translations = groq_translations.post do |request|
-      #   request.headers["Authorization"] = "Bearer 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"
-      #   request.body = {
-      #     file: Faraday::Multipart::FilePart.new(file, "audio/mp3"),
-      #     model: "distil-whisper-large-v3-en",
-      #     prompt: "Transcribe the audio as a conversation with multiple speakers. Label each speaker as 'Speaker 1', 'Speaker 2', and so on.",
-      #     temperature: 0,
-      #     response_format: "json"
-      #   }
-      # end
-
       parse_transcription = JSON.parse(transcriptions.body)
       transcript = parse_transcription["text"]
 
